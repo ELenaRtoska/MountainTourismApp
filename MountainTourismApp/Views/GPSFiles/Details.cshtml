@@ -1,0 +1,66 @@
+﻿@model MountainTourismApp.Models.GPSFile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GPSFile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.positiveD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.positiveD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.negativeD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.negativeD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.filePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.filePath)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

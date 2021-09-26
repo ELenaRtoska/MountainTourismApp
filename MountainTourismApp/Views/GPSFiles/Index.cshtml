@@ -1,0 +1,128 @@
+﻿@model IEnumerable<MountainTourismApp.Models.GPSFile>
+@{
+    ViewBag.Title = "GPS files";
+}
+
+@ViewBag.param
+<style>
+    .maps {
+        height: 300px;
+        width: 1000px;
+    }
+</style>
+
+<br />
+
+
+<h2>GPS files</h2>
+
+<p>
+    <br />
+
+
+
+    @Html.ActionLink("Create New", "Create")
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.positiveD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.negativeD)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.distance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.positiveD)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.negativeD)
+    </td>
+    <td>
+        @Html.ActionLink("DOWNLOAD", "View", new { id = item.Id })
+        {
+        <br />
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br />
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        }
+    </td>
+    <td>
+        <!--Html.ActionLink("GPS files", "ListGPSFiles")
+    <input type="button" value="Some text" onclick="window.location.href='@Url.Action("Index", "Sherpas" )';" />-->
+        @Html.ActionLink("Sherpas", "ListSherpas", new { id = item.Id })
+    </td>
+</tr>
+        <tr>
+            <td colspan="5" id="attribute_<%= @item.Id%>" class="maps">
+
+
+                @Scripts.Render("~/bundles/jquery")
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIVDhsp43HtlgDozCWLQg_XRyGRnf_IVU"></script>
+
+                <script type="text/javascript">
+
+
+
+
+                    function loadGPXFileIntoGoogleMap(map, filename) {
+                        $.ajax({
+                            url: filename,
+                            dataType: "xml",
+                            success: function (data) {
+                                var parser = new GPXParser(data, map);
+                                parser.setTrackColour("#ff0000");
+                                parser.setTrackWidth(5);
+                                parser.setMinTrackPointDelta(0.001);
+                                parser.centerAndZoom(data);
+                                parser.addTrackpointsToMap();
+                                parser.addWaypointsToMap();
+                            }
+                        });
+                    }
+
+
+                    $(document).ready(function () {
+                        var map = new google.maps.Map(document.getElementById("attribute_<%= @item.Id%>"), {
+                        center: { lat: 41.99646, lng: 21.43141 },
+                        zoom: 10
+                        });
+
+                        loadGPXFileIntoGoogleMap(map, "https://localhost:44386/GPSFile/" + "@item.title");
+
+
+                    });
+
+
+
+                </script>
+
+            </td>
+            
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+

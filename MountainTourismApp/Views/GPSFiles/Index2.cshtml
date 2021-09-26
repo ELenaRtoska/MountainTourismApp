@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MountainTourismApp.Models.GPSFile>
+@{
+    ViewBag.Title = "Index2";
+}
+
+@ViewBag.param
+
+
+<br />
+
+<h2>GPS files</h2>
+
+<p>
+    <br />
+
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.positiveD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.negativeD)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.positiveD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.negativeD)
+            </td>
+            <td>
+                @Html.ActionLink("DOWNLOAD", "View", new { id = item.Id })
+                @if (User.IsInRole("Administrator"))
+                {
+                    <br />
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br />
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

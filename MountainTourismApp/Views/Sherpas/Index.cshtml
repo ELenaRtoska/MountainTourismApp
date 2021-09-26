@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MountainTourismApp.Models.Sherpa>
+
+@{
+    ViewBag.Title = "Sherpa";
+}
+
+@ViewBag.param
+
+<br />
+<br />
+<br />
+<div width="200px" display="inline-block" overflow="auto" white-space="nowrap" margin="0px" border="1px">
+    <div style='float: left;'>
+        <h2>Sherpas</h2>
+    </div>
+    <div style='float: right;'>
+        <input type="button" value="Препорачана опрема &raquo;" onclick="window.location.href='@Url.Action("Index", "RecommendedEquipments" )';" />
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.yearsOfExperience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.licence)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@item.ImageURL" style="border-radius: 8px; width:200px; height:200px; display:block; margin-left:auto; margin-right:auto" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <p style=" font-family: cursive;">@item.description</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yearsOfExperience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.licence)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
