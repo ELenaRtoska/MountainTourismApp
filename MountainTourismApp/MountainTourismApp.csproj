@@ -49,12 +49,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -167,8 +176,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\FinalReservationsController.cs" />
     <Compile Include="Controllers\GPSFilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -176,6 +187,7 @@
     <Compile Include="Controllers\MountainsController.cs" />
     <Compile Include="Controllers\RecommendedEquipmentsController.cs" />
     <Compile Include="Controllers\SherpasController.cs" />
+    <Compile Include="Controllers\TouristPlacesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,10 +247,55 @@
     <Compile Include="Migrations\202109051320130_initial15.Designer.cs">
       <DependentUpon>202109051320130_initial15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109281009594_dd.cs" />
+    <Compile Include="Migrations\202109281009594_dd.Designer.cs">
+      <DependentUpon>202109281009594_dd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109281210137_ddd.cs" />
+    <Compile Include="Migrations\202109281210137_ddd.Designer.cs">
+      <DependentUpon>202109281210137_ddd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109281210595_dddd.cs" />
+    <Compile Include="Migrations\202109281210595_dddd.Designer.cs">
+      <DependentUpon>202109281210595_dddd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109290424030_ert.cs" />
+    <Compile Include="Migrations\202109290424030_ert.Designer.cs">
+      <DependentUpon>202109290424030_ert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109290505482_ert1.cs" />
+    <Compile Include="Migrations\202109290505482_ert1.Designer.cs">
+      <DependentUpon>202109290505482_ert1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301910008_ert4.cs" />
+    <Compile Include="Migrations\202109301910008_ert4.Designer.cs">
+      <DependentUpon>202109301910008_ert4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301935347_ert44.cs" />
+    <Compile Include="Migrations\202109301935347_ert44.Designer.cs">
+      <DependentUpon>202109301935347_ert44.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110020838480_ert7.cs" />
+    <Compile Include="Migrations\202110020838480_ert7.Designer.cs">
+      <DependentUpon>202110020838480_ert7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110021011439_ert8.cs" />
+    <Compile Include="Migrations\202110021011439_ert8.Designer.cs">
+      <DependentUpon>202110021011439_ert8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110021333072_ert9.cs" />
+    <Compile Include="Migrations\202110021333072_ert9.Designer.cs">
+      <DependentUpon>202110021333072_ert9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110031746111_ert12.cs" />
+    <Compile Include="Migrations\202110031746111_ert12.Designer.cs">
+      <DependentUpon>202110031746111_ert12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientMountain.cs" />
+    <Compile Include="Models\FinalReservation.cs" />
     <Compile Include="Models\GPSFile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -248,6 +305,7 @@
     <Compile Include="Models\RecommendedEquipment.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Sherpa.cs" />
+    <Compile Include="Models\TouristPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -580,6 +638,21 @@
     <Content Include="Views\GPSFiles\Index2.cshtml" />
     <Content Include="Views\GPSFiles\test.gpx" />
     <Content Include="Views\RecommendedEquipments\Pravilnik.cshtml" />
+    <Content Include="Views\TouristPlaces\Create.cshtml" />
+    <Content Include="Views\TouristPlaces\Delete.cshtml" />
+    <Content Include="Views\TouristPlaces\Details.cshtml" />
+    <Content Include="Views\TouristPlaces\Edit.cshtml" />
+    <Content Include="Views\TouristPlaces\Index.cshtml" />
+    <Content Include="Views\Sherpas\Reservation.cshtml" />
+    <Content Include="Views\Sherpas\Reservation2.cshtml" />
+    <Content Include="Views\FinalReservations\Create.cshtml" />
+    <Content Include="Views\FinalReservations\Delete.cshtml" />
+    <Content Include="Views\FinalReservations\Details.cshtml" />
+    <Content Include="Views\FinalReservations\Edit.cshtml" />
+    <Content Include="Views\FinalReservations\Index.cshtml" />
+    <Content Include="Views\GPSFiles\IndexAll.cshtml" />
+    <Content Include="Views\Sherpas\IndexAll.cshtml" />
+    <Content Include="Views\TouristPlaces\IndexAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -641,6 +714,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109051320130_initial15.resx">
       <DependentUpon>202109051320130_initial15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109281009594_dd.resx">
+      <DependentUpon>202109281009594_dd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109281210137_ddd.resx">
+      <DependentUpon>202109281210137_ddd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109281210595_dddd.resx">
+      <DependentUpon>202109281210595_dddd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109290424030_ert.resx">
+      <DependentUpon>202109290424030_ert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109290505482_ert1.resx">
+      <DependentUpon>202109290505482_ert1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301910008_ert4.resx">
+      <DependentUpon>202109301910008_ert4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301935347_ert44.resx">
+      <DependentUpon>202109301935347_ert44.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110020838480_ert7.resx">
+      <DependentUpon>202110020838480_ert7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110021011439_ert8.resx">
+      <DependentUpon>202110021011439_ert8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110021333072_ert9.resx">
+      <DependentUpon>202110021333072_ert9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110031746111_ert12.resx">
+      <DependentUpon>202110031746111_ert12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,11 +15,14 @@ namespace MountainTourismApp.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Планина")]
         public string Name { get; set; }
-        [Display(Name = "Image")]
+        [Display(Name = "Слика")]
         public string ImageURL { get; set; }
         [Required]
+        [Display(Name = "Рејтинг")]
         public float Raiting { get; set; }
+        [Display(Name = "Опис")]
         public string Description { get; set; }
 
         public virtual ICollection<Client> clients { get; set; }

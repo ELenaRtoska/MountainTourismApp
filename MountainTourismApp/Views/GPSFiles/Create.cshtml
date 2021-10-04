@@ -3,25 +3,39 @@
 @{
     ViewBag.Title = "Create";
 }
+<br />
+<h2 style=" font-family: fantasy; text-align:center;">Креирање на нов GPS фајл</h2>
 
-<h2>Create</h2>
-
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+</style>
 
 @using (Html.BeginForm("Create", "GPSFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>GPSFile</h4>
+    <h4 style=" font-family: cursive; text-align:center;">Внесете ги потребните податоци и прикачете го фајлот од GPS записот, после тоа притиснете на копчето 'Зачувај'</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.mountainId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.mountainId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.mountainId, "", new { @class = "text-danger" })
-        </div>
+<div class="form-group" style="visibility:hidden">
+    @Html.LabelFor(model => model.mountainId, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.mountainId, new { htmlAttributes = new { @Value = ViewBag.parm } })
+        @Html.ValidationMessageFor(model => model.mountainId, "", new { @class = "text-danger" })
     </div>
+</div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -72,14 +86,14 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Зачувај" class="btn btn-default" id="test" style=" font-family: cursive;"/>
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a style=" font-family: cursive;" class="btn" id="test" href="https://localhost:44386/">Назад кон почетна &laquo;</a>
 </div>
 
 @section Scripts {

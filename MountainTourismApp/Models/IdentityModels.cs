@@ -37,5 +37,9 @@ namespace MountainTourismApp.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MountainTourismApp.Models.TouristPlace> TouristPlaces { get; set; }
+
+        public System.Data.Entity.DbSet<MountainTourismApp.Models.FinalReservation> FinalReservations { get; set; }
     }
 }

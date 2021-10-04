@@ -1,0 +1,50 @@
+﻿@model MountainTourismApp.Models.TouristPlace
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Избриши</h2>
+
+<h3>Дали сте сигурни дека сакате да избришете?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Избриши" class="btn btn-default" /> <br />
+            <div>
+                <a class="btn" id="test" href="https://localhost:44386/">Назад кон почетна &laquo;</a>
+            </div>
+        </div>
+    }
+</div>

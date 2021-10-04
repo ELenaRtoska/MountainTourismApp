@@ -1,0 +1,50 @@
+﻿@model MountainTourismApp.Models.FinalReservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FinalReservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.userEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.finalSherpa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.finalSherpa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gpsFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gpsFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mountain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mountain)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

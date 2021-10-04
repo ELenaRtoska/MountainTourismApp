@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MountainTourismApp.Models.TouristPlace>
+
+@{
+    ViewBag.Title = "IndexAll";
+}
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+
+    th, td, p {
+        text-align: center;
+        vertical-align: inherit;
+        font-family: cursive;
+    }
+</style>
+<br />
+<h2 style="font-family: fantasy; text-align: center;">Атрактивни туристички места</h2>
+<p style="font-family: cursive; text-align:center;">Во зависност од турата што избравте да ја изменете следат некои поатрактивни туристички места кои се наоѓаат во нејзина близина и кои би можеле да ги посетете.</p>
+<br />
+<table class="table" style="position: center">
+    <tr>
+        <th style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th colspan="5" style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        <img src="@item.ImageURL" style="border-radius: 8px; width:200px; height:200px; display:block; margin-left:auto; margin-right:auto; vertical-align:inherit; text-align: center;" />
+
+    </td>
+    <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        @item.name
+    </td>
+    <td colspan="5" style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        @item.description
+    </td>
+
+
+</tr>
+    }
+
+</table>

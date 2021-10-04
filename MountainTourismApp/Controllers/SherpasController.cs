@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using MountainTourismApp.Models;
 
 namespace MountainTourismApp.Controllers
@@ -13,6 +14,11 @@ namespace MountainTourismApp.Controllers
     public class SherpasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult IndexAll()
+        {
+             return View(db.Sherpa.ToList());
+        }
 
         // GET: Sherpas
         public ActionResult Index(int? id)
@@ -38,8 +44,9 @@ namespace MountainTourismApp.Controllers
         }
 
         // GET: Sherpas/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            ViewBag.parm = id;
             return View();
         }
 
@@ -48,16 +55,17 @@ namespace MountainTourismApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GPSFileId,ImageURL,name,licence,description,yearsOfExperience")] Sherpa sherpa)
+        public ActionResult Create([Bind(Include = "Id,GPSFileId,ImageURL,name,licence,description,yearsOfExperience,club,hikers,dateTime")] Sherpa sherpa)
         {
             if (ModelState.IsValid)
             {
                 db.Sherpa.Add(sherpa);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
-            return View(sherpa);
+            //return View(sherpa);
+            return Redirect("https://localhost:44386/");
         }
 
         // GET: Sherpas/Edit/5
@@ -72,6 +80,23 @@ namespace MountainTourismApp.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            ViewBag.parm = id;
+
+            var userEmail = this.User.Identity.Name;
+            ViewBag.userEmail = userEmail;
+
+            var finalSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().name;
+            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().GPSFileId;
+            ViewBag.finalSherpa = finalSherpa;
+
+            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
+            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
+            ViewBag.gpsFile = gpsFile;
+
+            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
+            ViewBag.mountain = mountain;
             return View(sherpa);
         }
 
@@ -80,15 +105,41 @@ namespace MountainTourismApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GPSFileId,ImageURL,name,licence,description,yearsOfExperience")] Sherpa sherpa)
+        public ActionResult Edit([Bind(Include = "Id,GPSFileId,ImageURL,name,licence,description,yearsOfExperience,club,hikers,dateTime")] Sherpa sherpa)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sherpa).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                // return RedirectToAction("Index");
             }
-            return View(sherpa);
+            
+
+            int _id = sherpa.Id;
+            db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().hikers++;
+            db.SaveChanges();
+            FinalReservation finalReservation = new FinalReservation();
+            var userEmail = this.User.Identity.Name;
+            var finalSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().name;
+            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().GPSFileId;
+            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
+            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
+            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
+            var dateTime = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().dateTime;
+            var hikers = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().hikers;
+            ViewBag.mountain = mountain;
+            finalReservation.userEmail = userEmail;
+            finalReservation.finalSherpa = finalSherpa;
+            finalReservation.gpsFile = gpsFile;
+            finalReservation.mountain = mountain;
+            finalReservation.dateTime = dateTime;
+            finalReservation.hikers = hikers;
+            db.FinalReservations.Add(finalReservation);
+            db.SaveChanges();
+
+            // return View(sherpa);
+            return Redirect("https://localhost:44386/");
+
         }
 
         // GET: Sherpas/Delete/5
@@ -114,7 +165,8 @@ namespace MountainTourismApp.Controllers
             Sherpa sherpa = db.Sherpa.Find(id);
             db.Sherpa.Remove(sherpa);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Redirect("https://localhost:44386/");
         }
 
         protected override void Dispose(bool disposing)
@@ -125,5 +177,65 @@ namespace MountainTourismApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult ListTouristPlaces(int? id)
+        {
+            return RedirectToAction("Index", new RouteValueDictionary(new { Controller = "TouristPlaces", Action = "Index", Id = id }));
+        }
+
+        public ActionResult Reservation(int? id)
+        {
+            //ViewBag.parm = id;
+            //return View();
+
+            ViewBag.parm = id;
+
+            var userEmail = this.User.Identity.Name;
+            ViewBag.userEmail = userEmail;
+
+            var finalSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().name;
+            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().GPSFileId;
+            ViewBag.finalSherpa = finalSherpa;
+
+            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
+            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
+            ViewBag.gpsFile = gpsFile;
+
+            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
+            ViewBag.mountain = mountain;
+
+            return View();
+        }
+
+        public ActionResult Reservation2(string id, string _dt)
+        {
+            int _id = Int16.Parse(id);
+            db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().hikers++;
+
+            FinalReservation finalReservation = new FinalReservation();
+
+            var userEmail = this.User.Identity.Name;
+
+            var finalSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().name;
+            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().GPSFileId;
+
+            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
+            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
+
+            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
+            ViewBag.mountain = mountain;
+
+
+            finalReservation.userEmail = userEmail;
+            finalReservation.finalSherpa = finalSherpa;
+            finalReservation.gpsFile = gpsFile;
+            finalReservation.mountain = mountain;
+            db.FinalReservations.Add(finalReservation);
+
+            db.SaveChanges();
+            return View();
+        }
+
+
     }
 }

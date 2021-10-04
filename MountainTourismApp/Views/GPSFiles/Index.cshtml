@@ -14,63 +14,63 @@
 <br />
 
 
-<h2>GPS files</h2>
+
+<h2 style=" font-family: fantasy; text-align:center;">GPS фајлови</h2>
+<br />
+<p style=" font-family: cursive; text-align:center;">Изберете GPS запис кој би сакале да го изминете. <br />Постои опција за симнување на фајлот со цел да го ставите во друг уред(пр. часовник) за полесно да се снајдете при самата планинска тура.<br />
+    Кога ќе изберете GPS фајл притеснете на копчето <i>'Планинарски водич'</i> за избраниот GPS фајл за да продолжите со резервацијата</p>
+<br />
+
 
 <p>
     <br />
 
 
+    <div class="btn" id="test">
+        @Html.ActionLink("Прикачи нов GPS фајл", "Create", new { id = ViewBag.parm})
+        </div>
 
-    @Html.ActionLink("Create New", "Create")
 
 </p>
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+</style>
 <table class="table">
     <tr>
-        <th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            GPS фајл
+        </th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
             @Html.DisplayNameFor(model => model.description)
         </th>
-        <th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
             @Html.DisplayNameFor(model => model.distance)
         </th>
-        <th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
             @Html.DisplayNameFor(model => model.positiveD)
         </th>
-        <th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
             @Html.DisplayNameFor(model => model.negativeD)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.distance)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.positiveD)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.negativeD)
-    </td>
-    <td>
-        @Html.ActionLink("DOWNLOAD", "View", new { id = item.Id })
-        {
-        <br />
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br />
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        }
-    </td>
-    <td>
-        <!--Html.ActionLink("GPS files", "ListGPSFiles")
-    <input type="button" value="Some text" onclick="window.location.href='@Url.Action("Index", "Sherpas" )';" />-->
-        @Html.ActionLink("Sherpas", "ListSherpas", new { id = item.Id })
-    </td>
-</tr>
         <tr>
-            <td colspan="5" id="attribute_<%= @item.Id%>" class="maps">
+            <td style="width:500px;">
+            <div id="attribute_<%= @item.Id%>" class="maps" style="padding-bottom:80px; width:100%; text-align:center; vertical-align:inherit;">
 
 
                 @Scripts.Render("~/bundles/jquery")
@@ -113,8 +113,43 @@
 
                 </script>
 
+            </div>
+                </td>
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.description)
             </td>
-            
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.distance)
+            </td>
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.positiveD)
+            </td>
+            <td style="        font-family: cursive;
+        text-align: center;
+        vertical-align: inherit;
+">
+                @Html.DisplayFor(modelItem => item.negativeD)
+            </td>
+            <td style="        font-family: cursive;
+        text-align: center;
+        vertical-align: inherit;
+">
+                <div class="btn" id="test">
+                    @Html.ActionLink("Симни GPS фајл", "View", new { id = item.Id })
+                </div>
+                <br />
+                <div class="btn" id="test">
+                    @Html.ActionLink("Планинарски водич", "ListSherpas", new { id = item.Id })
+                </div>
+
+                @if (User.IsInRole("Administrator"))
+                {
+                    <br />
+                    @Html.ActionLink("Измени", "Edit", new { id = item.Id })<br />
+                    @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                }
+
+                </td>
         </tr>
     }
 

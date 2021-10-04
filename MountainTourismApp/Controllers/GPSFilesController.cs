@@ -17,6 +17,11 @@ namespace MountainTourismApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult IndexAll()
+        {
+             return View(db.GPSFile.ToList());
+        }
+
         // GET: GPSFiles
         public ActionResult Index(int? id)
         {
@@ -42,8 +47,9 @@ namespace MountainTourismApp.Controllers
         }
 
         // GET: GPSFiles/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            ViewBag.parm = id;
             return View();
         }
 
@@ -73,10 +79,11 @@ namespace MountainTourismApp.Controllers
              {
                  db.Entry(gPSFile).State = EntityState.Modified;
                  db.SaveChanges();
-                 return RedirectToAction("Index");
+                 //return RedirectToAction("Index");
              }
-             return View(gPSFile);
-         }
+            //return View(gPSFile);
+            return Redirect("https://localhost:44386/");
+        }
          
 
         [HttpPost]
@@ -95,7 +102,8 @@ namespace MountainTourismApp.Controllers
                 db.SaveChanges();
 
                 ModelState.Clear();
-            return View();
+            //return View();
+            return Redirect("https://localhost:44386/");
         }
         
         // GET: GPSFiles/Delete/5
@@ -121,7 +129,8 @@ namespace MountainTourismApp.Controllers
             GPSFile gPSFile = db.GPSFile.Find(id);
             db.GPSFile.Remove(gPSFile);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Redirect("https://localhost:44386/");
         }
 
         protected override void Dispose(bool disposing)

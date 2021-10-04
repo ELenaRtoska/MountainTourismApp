@@ -14,13 +14,13 @@ namespace MountainTourismApp.Models
         public int Id { get; set; }
 
         public int mountainId { get; set; }
-
+        [Display(Name = "Наслов")]
         public string title { get; set; }
 
-        [Display(Name = "Route")]
+        [Display(Name = "Рута")]
         public string description { get; set; }
 
-        [Display(Name = "Distance(km)")]
+        [Display(Name = "Дистанца(km)")]
         public float distance { get; set; }
 
         [Display(Name = "D+")]
@@ -29,7 +29,7 @@ namespace MountainTourismApp.Models
         [Display(Name = "D-")]
         public int negativeD { get; set; }
 
-        [Display(Name = "Upload File")]
+        [Display(Name = "Прикачи фајл")]
         public string filePath { get; set; }
 
         [NotMapped]

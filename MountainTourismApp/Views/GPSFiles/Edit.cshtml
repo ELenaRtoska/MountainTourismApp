@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Измени</h2>
 
 
 @using (Html.BeginForm())
@@ -12,11 +12,10 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>GPSFile</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
-    <div class="form-group">
+    <div class="form-group" style="visibility:hidden">
         @Html.LabelFor(model => model.mountainId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.mountainId, new { htmlAttributes = new { @class = "form-control" } })
@@ -24,7 +23,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="visibility:hidden">
         @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
@@ -64,24 +63,17 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.filePath, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.filePath, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.filePath, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Зачувај" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a style=" font-family: cursive;" class="btn" id="test" href="https://localhost:44386/">Назад кон почетна &laquo;</a>
 </div>
 
 @section Scripts {

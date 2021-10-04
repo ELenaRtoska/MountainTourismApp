@@ -4,27 +4,48 @@
     ViewBag.Title = "Sherpa";
 }
 
-@ViewBag.param
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+    th, td {
+        text-align: center;
+        vertical-align: inherit;
+    }
+</style>
+<br />
+<h2 style="font-family: fantasy; text-align:center;">Планинарски водич</h2>
 
-<br />
-<br />
-<br />
-<div width="200px" display="inline-block" overflow="auto" white-space="nowrap" margin="0px" border="1px">
     <div style='float: left;'>
-        <h2>Sherpas</h2>
+        <p style=" font-family: cursive;">
+            Изберете планинарски водич со кој би сакале да ја резервирате вашата планинска тура. <br />
+            Следните планинарски водичи се регистрирани за планината и рутата што ги избравте на претходните страни.<br />
+            Кога ќе изберете планинарски водич притиснете на копчето 'Резервирај' за да изберете датум и време за турата и каде ќе имате преглед на досегашните избрани ставки.
+            Исто така на секој запис од планинарски водич постои 'Туристички места' каде што можете да видете кои туристички места се препорачани да ги посетете(во близина на рутата која имате план да ја изминете).<br />
+            Во горниот десен агол постои копче 'Препорачана опрема' каде што може да се провери за која температура која опрема е препорачана да ја понесете со себе, потоа следат три пренасочувања: правилник, прогноза и смештај.
+        </p>
     </div>
     <div style='float: right;'>
-        <input type="button" value="Препорачана опрема &raquo;" onclick="window.location.href='@Url.Action("Index", "RecommendedEquipments" )';" />
+        <input type="button" class="btn" id="test" value="Препорачана опрема &raquo;" onclick="window.location.href='@Url.Action("Index", "RecommendedEquipments" )';" />
     </div>
-</div>
-<br />
-<br />
-<br />
-<br />
+
+
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Додај нов планинарски водич", "Create", new { id = ViewBag.parm })
+    }
+    </p>
+<table class="table" style="font-family: cursive;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ImageURL)
@@ -41,34 +62,53 @@
         <th>
             @Html.DisplayNameFor(model => model.licence)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.club)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hikers)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <img src="@item.ImageURL" style="border-radius: 8px; width:200px; height:200px; display:block; margin-left:auto; margin-right:auto" />
+<tr>
+    <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        <img src="@item.ImageURL" style="border-radius: 8px; width:200px; height:200px; display:block; margin-left:auto; margin-right:auto; vertical-align:inherit; text-align: center;" />
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                <p style=" font-family: cursive;">@item.description</p>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.yearsOfExperience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.licence)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    </td>
+    <td style="vertical-align:inherit; text-align: center;">
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        @item.description
+    </td>
+    <td style="vertical-align:inherit; text-align: center;">
+        @Html.DisplayFor(modelItem => item.yearsOfExperience)
+    </td>
+    <td style="vertical-align:inherit; text-align: center;">
+        @Html.DisplayFor(modelItem => item.licence)
+    </td>
+    <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+        @item.club
+    </td>
+    <td style="vertical-align:inherit; text-align: center;">
+        @Html.DisplayFor(modelItem => item.hikers)
+    </td>
+    <td>
+
+        <div class="btn" id="test"> @Html.ActionLink("Туристички места", "ListTouristPlaces", new { id = item.Id })</div><br />
+        <div class="btn" id="test"> @Html.ActionLink("Резервирај", "Edit", new { id = item.Id })</div>
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <br />
+            @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+        }
+
+        </td>
+</tr>
     }
 
 </table>

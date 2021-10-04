@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MountainTourismApp.Models.Sherpa>
+
+@{
+    ViewBag.Title = "IndexAll";
+}
+
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: inherit;
+    }
+</style>
+<br />
+<h2 style="font-family: fantasy; text-align:center;">Планинарски водич</h2>
+
+
+    <p style=" font-family: cursive; text-align: center;">
+        Сите планинарски водичи за сите предложени GPS рути
+    </p>
+<br />
+
+
+
+<table class="table" style="font-family: cursive;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.yearsOfExperience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.licence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.club)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hikers)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+                <img src="@item.ImageURL" style="border-radius: 8px; width:200px; height:200px; display:block; margin-left:auto; margin-right:auto; vertical-align:inherit; text-align: center;" />
+
+            </td>
+            <td style="vertical-align:inherit; text-align: center;">
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+                @item.description
+            </td>
+            <td style="vertical-align:inherit; text-align: center;">
+                @Html.DisplayFor(modelItem => item.yearsOfExperience)
+            </td>
+            <td style="vertical-align:inherit; text-align: center;">
+                @Html.DisplayFor(modelItem => item.licence)
+            </td>
+            <td style=" font-family: cursive; vertical-align:inherit; text-align: center;">
+                @item.club
+            </td>
+            <td style="vertical-align:inherit; text-align: center;">
+                @Html.DisplayFor(modelItem => item.hikers)
+            </td>
+           
+        </tr>
+    }
+
+</table>

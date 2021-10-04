@@ -1,0 +1,132 @@
+﻿@model IEnumerable<MountainTourismApp.Models.GPSFile>
+@{
+    ViewBag.Title = "IndexAll";
+}
+
+<style>
+    .maps {
+        height: 300px;
+        width: 1000px;
+    }
+</style>
+
+<br />
+
+
+
+<h2 style=" font-family: fantasy; text-align:center;">GPS фајлови</h2>
+<br />
+<p style=" font-family: cursive; text-align:center;">
+ Сите GPS записи за сите предложени планини</p>
+<br />
+
+
+<style>
+    #test {
+        position: relative;
+        padding: 8px 20px;
+        margin: 20px 0 0 0;
+        font: bold 14px Arial, Helvetica;
+        background-color: #eee;
+        font-family: cursive;
+        color: black;
+        border-color: black;
+        border-width: medium;
+        border-radius: 5px;
+    }
+</style>
+<table class="table">
+    <tr>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            GPS фајл
+        </th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            @Html.DisplayNameFor(model => model.distance)
+        </th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            @Html.DisplayNameFor(model => model.positiveD)
+        </th>
+        <th style="text-align:center; font-family: cursive; text-align:center;">
+            @Html.DisplayNameFor(model => model.negativeD)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width:500px;">
+                <div id="attribute_<%= @item.Id%>" class="maps" style="padding-bottom:80px; width:100%; text-align:center; vertical-align:inherit;">
+
+
+                    @Scripts.Render("~/bundles/jquery")
+                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIVDhsp43HtlgDozCWLQg_XRyGRnf_IVU"></script>
+
+                    <script type="text/javascript">
+
+
+
+
+                    function loadGPXFileIntoGoogleMap(map, filename) {
+                        $.ajax({
+                            url: filename,
+                            dataType: "xml",
+                            success: function (data) {
+                                var parser = new GPXParser(data, map);
+                                parser.setTrackColour("#ff0000");
+                                parser.setTrackWidth(5);
+                                parser.setMinTrackPointDelta(0.001);
+                                parser.centerAndZoom(data);
+                                parser.addTrackpointsToMap();
+                                parser.addWaypointsToMap();
+                            }
+                        });
+                    }
+
+
+                    $(document).ready(function () {
+                        var map = new google.maps.Map(document.getElementById("attribute_<%= @item.Id%>"), {
+                        center: { lat: 41.99646, lng: 21.43141 },
+                        zoom: 10
+                        });
+
+                        loadGPXFileIntoGoogleMap(map, "https://localhost:44386/GPSFile/" + "@item.title");
+
+
+                    });
+
+
+
+                    </script>
+
+                </div>
+            </td>
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.distance)
+            </td>
+            <td style=" font-family: cursive; text-align:center; vertical-align:inherit;">
+                @Html.DisplayFor(modelItem => item.positiveD)
+            </td>
+            <td style="        font-family: cursive;
+        text-align: center;
+        vertical-align: inherit;
+">
+                @Html.DisplayFor(modelItem => item.negativeD)
+            </td>
+           
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+

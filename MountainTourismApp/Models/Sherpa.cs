@@ -13,19 +13,28 @@ namespace MountainTourismApp.Models
 
         public int GPSFileId { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "Слика")]
         public string ImageURL { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Име")]
         public string name { get; set; }
 
-        [Display(Name = "Licence")]
+        [Display(Name = "Лиценца")]
         public Boolean licence { get; set; }
 
-        [Display(Name = "Description")]
+        [Display(Name = "Опис")]
         public string description { get; set; }
 
-        [Display(Name = "Years of experience")]
+        [Display(Name = "Години искуство")]
         public int yearsOfExperience { get; set; }
+
+        [Display(Name = "Планинарски клуб")]
+        public string club { get; set; }
+
+        [Display(Name = "Број на планинари")]
+        public int hikers { get; set; }
+
+        [Display(Name = "Датум и време")]
+        public DateTime dateTime { get; set; }
     }
 }
