@@ -24,6 +24,10 @@ namespace MountainTourismApp.Controllers
         public ActionResult Index(int? id)
         {
             ViewBag.parm = id;
+
+            var mountainGPS = db.GPSFile.Where(b => b.Id == id).ToList().FirstOrDefault().mountainId;
+            ViewBag.mountain = mountainGPS;
+
             return View(db.Sherpa.Where(b => b.GPSFileId == id).ToList());
             // return View(db.Sherpa.ToList());
         }
@@ -138,7 +142,7 @@ namespace MountainTourismApp.Controllers
             db.SaveChanges();
 
             // return View(sherpa);
-            return Redirect("https://localhost:44386/");
+            return Redirect("https://localhost:44386/FinalReservations");
 
         }
 

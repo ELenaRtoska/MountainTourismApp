@@ -25,26 +25,32 @@
 <br />
 <h2 style="font-family: fantasy; text-align:center;">Планинарски водич</h2>
 
-    <div style='float: left;'>
-        <p style=" font-family: cursive;">
-            Изберете планинарски водич со кој би сакале да ја резервирате вашата планинска тура. <br />
-            Следните планинарски водичи се регистрирани за планината и рутата што ги избравте на претходните страни.<br />
-            Кога ќе изберете планинарски водич притиснете на копчето 'Резервирај' за да изберете датум и време за турата и каде ќе имате преглед на досегашните избрани ставки.
-            Исто така на секој запис од планинарски водич постои 'Туристички места' каде што можете да видете кои туристички места се препорачани да ги посетете(во близина на рутата која имате план да ја изминете).<br />
-            Во горниот десен агол постои копче 'Препорачана опрема' каде што може да се провери за која температура која опрема е препорачана да ја понесете со себе, потоа следат три пренасочувања: правилник, прогноза и смештај.
-        </p>
-    </div>
-    <div style='float: right;'>
-        <input type="button" class="btn" id="test" value="Препорачана опрема &raquo;" onclick="window.location.href='@Url.Action("Index", "RecommendedEquipments" )';" />
-    </div>
-
-
-<p>
-    @if (User.IsInRole("Administrator"))
-    {
-        @Html.ActionLink("Додај нов планинарски водич", "Create", new { id = ViewBag.parm })
-    }
+<div style='float: left; width:900px;'>
+    <p style=" font-family: cursive;">
+        Изберете планинарски водич со кој би сакале да ја резервирате вашата планинска тура. <br />
+        Следните планинарски водичи се регистрирани за планината и рутата што ги избравте на претходните страни.<br />
+        Кога ќе изберете планинарски водич притиснете на копчето 'Резервирај' за да изберете датум и време за турата и каде ќе имате преглед на досегашните избрани ставки.
+        Исто така на секој запис од планинарски водич постои 'Туристички места' каде што можете да видете кои туристички места се препорачани да ги посетете(во близина на рутата која имате план да ја изминете).<br />
+        Во горниот десен агол постои копче 'Препорачана опрема' каде што може да се провери за која температура која опрема е препорачана да ја понесете со себе, потоа следат три пренасочувања: правилник, прогноза и смештај.
     </p>
+    <br />
+    <p>
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("Додај нов планинарски водич", "Create", new { id = ViewBag.parm })
+        }
+    </p>
+</div>
+    <div style='float: right;'>
+
+        <input type="button" class="btn" id="test" value="Препорачана опрема &raquo;" onclick="window.location.href='@Url.Action("Index", "RecommendedEquipments" )';" />
+        <br />
+        <div class="btn" id="test"> @Html.ActionLink("Туристички места", "ListTouristPlaces", new { id = ViewBag.mountain })</div>
+    </div>
+
+    
+
+
 <table class="table" style="font-family: cursive;">
     <tr>
         <th>
@@ -96,9 +102,8 @@
     <td style="vertical-align:inherit; text-align: center;">
         @Html.DisplayFor(modelItem => item.hikers)
     </td>
-    <td>
+    <td style="vertical-align:inherit; text-align: center;">
 
-        <div class="btn" id="test"> @Html.ActionLink("Туристички места", "ListTouristPlaces", new { id = item.Id })</div><br />
         <div class="btn" id="test"> @Html.ActionLink("Резервирај", "Edit", new { id = item.Id })</div>
 
         @if (User.IsInRole("Administrator"))
