@@ -27,12 +27,13 @@
 <h2 style="font-family: fantasy; text-align: center;">Атрактивни туристички места</h2>
 <p style="font-family: cursive; text-align:center;">Во зависност од турата што избравте да ја изменете следат некои поатрактивни туристички места кои се наоѓаат во нејзина близина и кои би можеле да ги посетете.</p>
 <br />
-<p>
-    @if (User.IsInRole("Administrator"))
-    {
+<div style="text-align:center; position:center;">
+
+    <div id="test" class="btn">
         @Html.ActionLink("Креирај нов запис за туристичко место", "Create", new { id = ViewBag.parm })
-    }
-    </p>
+    </div>
+</div>
+<br />
 <table class="table">
     <tr>
         <th style=" font-family: cursive; vertical-align:inherit; text-align: center;">

@@ -21,7 +21,7 @@ namespace MountainTourismApp.Controllers
         }
 
         // GET: Sherpas
-        public ActionResult Index(int? id)
+        public ActionResult Index(int id)
         {
             ViewBag.parm = id;
 
@@ -29,7 +29,7 @@ namespace MountainTourismApp.Controllers
             ViewBag.mountain = mountainGPS;
 
             return View(db.Sherpa.Where(b => b.GPSFileId == id).ToList());
-            // return View(db.Sherpa.ToList());
+
         }
 
         // GET: Sherpas/Details/5
@@ -69,7 +69,9 @@ namespace MountainTourismApp.Controllers
             }
 
             //return View(sherpa);
-            return Redirect("https://localhost:44386/");
+            //ViewBag.parm = sherpa.GPSFileId;
+            var a = "https://localhost:44386/Sherpas/Index/" + sherpa.GPSFileId.ToString();
+            return Redirect(a);
         }
 
         // GET: Sherpas/Edit/5
@@ -141,7 +143,6 @@ namespace MountainTourismApp.Controllers
             db.FinalReservations.Add(finalReservation);
             db.SaveChanges();
 
-            // return View(sherpa);
             return Redirect("https://localhost:44386/FinalReservations");
 
         }
@@ -149,6 +150,7 @@ namespace MountainTourismApp.Controllers
         // GET: Sherpas/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.parm = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().GPSFileId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -169,8 +171,9 @@ namespace MountainTourismApp.Controllers
             Sherpa sherpa = db.Sherpa.Find(id);
             db.Sherpa.Remove(sherpa);
             db.SaveChanges();
-            //return RedirectToAction("Index");
-            return Redirect("https://localhost:44386/");
+            //ViewBag.parm = sherpa.GPSFileId;
+            var a = "https://localhost:44386/Sherpas/Index/" + sherpa.GPSFileId.ToString();
+            return Redirect(a);
         }
 
         protected override void Dispose(bool disposing)
@@ -187,58 +190,7 @@ namespace MountainTourismApp.Controllers
             return RedirectToAction("Index", new RouteValueDictionary(new { Controller = "TouristPlaces", Action = "Index", Id = id }));
         }
 
-        public ActionResult Reservation(int? id)
-        {
-            //ViewBag.parm = id;
-            //return View();
-
-            ViewBag.parm = id;
-
-            var userEmail = this.User.Identity.Name;
-            ViewBag.userEmail = userEmail;
-
-            var finalSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().name;
-            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == id).ToList().FirstOrDefault().GPSFileId;
-            ViewBag.finalSherpa = finalSherpa;
-
-            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
-            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
-            ViewBag.gpsFile = gpsFile;
-
-            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
-            ViewBag.mountain = mountain;
-
-            return View();
-        }
-
-        public ActionResult Reservation2(string id, string _dt)
-        {
-            int _id = Int16.Parse(id);
-            db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().hikers++;
-
-            FinalReservation finalReservation = new FinalReservation();
-
-            var userEmail = this.User.Identity.Name;
-
-            var finalSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().name;
-            var gpsFileSherpa = db.Sherpa.Where(b => b.Id == _id).ToList().FirstOrDefault().GPSFileId;
-
-            var gpsFile = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().description;
-            var mountainGPS = db.GPSFile.Where(b => b.Id == gpsFileSherpa).ToList().FirstOrDefault().mountainId;
-
-            var mountain = db.Mountains.Where(b => b.Id == mountainGPS).ToList().FirstOrDefault().Name;
-            ViewBag.mountain = mountain;
-
-
-            finalReservation.userEmail = userEmail;
-            finalReservation.finalSherpa = finalSherpa;
-            finalReservation.gpsFile = gpsFile;
-            finalReservation.mountain = mountain;
-            db.FinalReservations.Add(finalReservation);
-
-            db.SaveChanges();
-            return View();
-        }
+        
 
 
     }

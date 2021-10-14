@@ -9,7 +9,7 @@ namespace MountainTourismApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.4.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,10 +26,45 @@ namespace MountainTourismApp
                       "~/Scripts/DataTables/dataTables.bootstrap.js",
                       "~/Scripts/loadgpx.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                                    "~/Scripts/moment-with-locales.min.js",
+                                    "~/Scripts/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                                    "~/Scripts/bootstrap-datetimepicker.js"));
+
+
+
+
+
+
+            //Create bundel for jQueryUI  
+            //js  
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                      "~/Scripts/jquery-ui-1.12.1.js"));
+
+
+
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/site.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css"));
+
+            
+            //css  
+            bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
+                   "~/Content/jquery-ui.css"));
+
+            
+            
+
+
+
+
+
         }
     }
 }

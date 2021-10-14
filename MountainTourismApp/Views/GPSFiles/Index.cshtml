@@ -79,8 +79,6 @@
                 <script type="text/javascript">
 
 
-
-
                     function loadGPXFileIntoGoogleMap(map, filename) {
                         $.ajax({
                             url: filename,
@@ -109,8 +107,6 @@
 
                     });
 
-
-
                 </script>
 
             </div>
@@ -130,10 +126,7 @@
 ">
                 @Html.DisplayFor(modelItem => item.negativeD)
             </td>
-            <td style="        font-family: cursive;
-        text-align: center;
-        vertical-align: inherit;
-">
+            <td style="font-family: cursive; text-align: center; vertical-align: inherit;">
                 <div class="btn" id="test">
                     @Html.ActionLink("Симни GPS фајл", "View", new { id = item.Id })
                 </div>
@@ -142,14 +135,18 @@
                     @Html.ActionLink("Планинарски водич", "ListSherpas", new { id = item.Id })
                 </div>
 
-                @if (User.IsInRole("Administrator"))
-                {
-                    <br />
-                    @Html.ActionLink("Измени", "Edit", new { id = item.Id })<br />
-                    @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
-                }
+                <br />
+                <div class="btn" id="test">
+                    @Html.ActionLink("Измени", "Edit", new { id = item.Id })
+                </div>
 
-                </td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <br />
+                        @Html.ActionLink("Избриши", "Delete", new { id = item.Id })
+                    }
+
+            </td>
         </tr>
     }
 

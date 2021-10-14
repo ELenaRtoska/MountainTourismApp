@@ -56,6 +56,7 @@ namespace MountainTourismApp.Controllers
         // GET: GPSFiles/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.parm = db.GPSFile.Where(b => b.Id == id).ToList().FirstOrDefault().mountainId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -82,7 +83,8 @@ namespace MountainTourismApp.Controllers
                  //return RedirectToAction("Index");
              }
             //return View(gPSFile);
-            return Redirect("https://localhost:44386/");
+            var a = "https://localhost:44386/GPSFiles/Index/" + gPSFile.mountainId.ToString();
+            return Redirect(a);
         }
          
 
@@ -103,12 +105,14 @@ namespace MountainTourismApp.Controllers
 
                 ModelState.Clear();
             //return View();
-            return Redirect("https://localhost:44386/");
+            var a = "https://localhost:44386/GPSFiles/Index/" + gPSFile.mountainId.ToString();
+            return Redirect(a);
         }
         
         // GET: GPSFiles/Delete/5
         public ActionResult Delete(int? id)
         {
+            ViewBag.parm = db.GPSFile.Where(b => b.Id == id).ToList().FirstOrDefault().mountainId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,7 +134,8 @@ namespace MountainTourismApp.Controllers
             db.GPSFile.Remove(gPSFile);
             db.SaveChanges();
             //return RedirectToAction("Index");
-            return Redirect("https://localhost:44386/");
+            var a = "https://localhost:44386/GPSFiles/Index/" + gPSFile.mountainId.ToString();
+            return Redirect(a);
         }
 
         protected override void Dispose(bool disposing)
@@ -148,8 +153,6 @@ namespace MountainTourismApp.Controllers
             GPSFile GPSFileModel = new GPSFile();
             GPSFileModel = db.GPSFile.Where(x => x.Id == id).FirstOrDefault();
             this.downloadFile(GPSFileModel.title);
-            //return View();
-            //return RedirectToAction("Index", "GPSFile");
             return RedirectToAction("Index", "Mountain");
         }
 

@@ -63,8 +63,8 @@ namespace MountainTourismApp.Controllers
                 //return RedirectToAction("Index");
             }
 
-            //return View(touristPlace);
-            return Redirect("https://localhost:44386/");
+            var a = "https://localhost:44386/TouristPlaces/Index/" + touristPlace.SherpaId.ToString();
+            return Redirect(a);
         }
 
         // GET: TouristPlaces/Edit/5
@@ -75,6 +75,7 @@ namespace MountainTourismApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TouristPlace touristPlace = db.TouristPlaces.Find(id);
+            ViewBag.parm = touristPlace.SherpaId;
             if (touristPlace == null)
             {
                 return HttpNotFound();
@@ -95,8 +96,8 @@ namespace MountainTourismApp.Controllers
                 db.SaveChanges();
                 //return RedirectToAction("Index");
             }
-            //return View(touristPlace);
-            return Redirect("https://localhost:44386/");
+            var a = "https://localhost:44386/TouristPlaces/Index/" + touristPlace.SherpaId.ToString();
+            return Redirect(a);
         }
 
         // GET: TouristPlaces/Delete/5
@@ -107,6 +108,7 @@ namespace MountainTourismApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TouristPlace touristPlace = db.TouristPlaces.Find(id);
+            ViewBag.parm = touristPlace.SherpaId;
             if (touristPlace == null)
             {
                 return HttpNotFound();
@@ -122,8 +124,9 @@ namespace MountainTourismApp.Controllers
             TouristPlace touristPlace = db.TouristPlaces.Find(id);
             db.TouristPlaces.Remove(touristPlace);
             db.SaveChanges();
-            //return RedirectToAction("Index");
-            return Redirect("https://localhost:44386/");
+
+            var a = "https://localhost:44386/TouristPlaces/Index/" + touristPlace.SherpaId.ToString();
+            return Redirect(a);
         }
 
         protected override void Dispose(bool disposing)

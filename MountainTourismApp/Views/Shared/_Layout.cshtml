@@ -35,8 +35,12 @@
         @RenderBody()
     </div>
 
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/jqueryui")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

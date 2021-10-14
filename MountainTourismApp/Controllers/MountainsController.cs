@@ -53,11 +53,10 @@ namespace MountainTourismApp.Controllers
             {
                 db.Mountains.Add(mountain);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
-            //return View(mountain);
-            return Redirect("https://localhost:44386/");
+            return View(mountain);
         }
 
         // GET: Mountains/Edit/5
@@ -86,10 +85,9 @@ namespace MountainTourismApp.Controllers
             {
                 db.Entry(mountain).State = EntityState.Modified;
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
-            //return View(mountain);
-            return Redirect("https://localhost:44386/");
+            return View(mountain);
         }
 
         // GET: Mountains/Delete/5
@@ -115,8 +113,8 @@ namespace MountainTourismApp.Controllers
             Mountain mountain = db.Mountains.Find(id);
             db.Mountains.Remove(mountain);
             db.SaveChanges();
-            //return RedirectToAction("Index");
-            return Redirect("https://localhost:44386/");
+            return RedirectToAction("Index");
+            //return Redirect("https://localhost:44386/");
         }
 
         protected override void Dispose(bool disposing)

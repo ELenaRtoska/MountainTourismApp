@@ -95,8 +95,8 @@
 </div>
 }
 
-<div>
-    <a class="btn" id="test" href="https://localhost:44386/">Назад кон почетна &laquo;</a>
+<div style=" font-family: cursive;" class="btn">
+    @Html.ActionLink("Назад кон листата", "Index", "Sherpas", new { id = ViewBag.parm }, null)
 </div>
 
 @section Scripts {

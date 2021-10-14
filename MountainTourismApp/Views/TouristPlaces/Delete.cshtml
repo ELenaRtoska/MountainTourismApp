@@ -40,11 +40,11 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Избриши" class="btn btn-default" /> <br />
-            <div>
-                <a class="btn" id="test" href="https://localhost:44386/">Назад кон почетна &laquo;</a>
-            </div>
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Избриши" class="btn btn-default" /> <br />
+    <div style=" font-family: cursive;" class="btn" id="test">
+        @Html.ActionLink("Назад кон листата", "Index", "TouristPlaces", new { id = ViewBag.parm }, null)
+    </div>
+</div>
     }
 </div>
